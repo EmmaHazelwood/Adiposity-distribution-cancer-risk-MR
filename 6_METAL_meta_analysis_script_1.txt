@@ -1,0 +1,232 @@
+#See https://genome.sph.umich.edu/wiki/METAL_Documentation
+
+#We want to use the standard approach of weighting by sample size/p-value
+
+#Liver cancer
+#As we are using genome-wide data, we can use this to control for genomic control - do this now for input files, then after the meta-analysis read the results file back in and do this again
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+#Allow for tracking allele frequencies to identify allele flips
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+#Upload first file - UK Biobank
+MARKER SNP
+ALLELE A1 A2
+FREQ AF1
+EFFECT BETA
+STDERR SE
+PVAL P
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 855.598587
+
+PROCESS data/Obesity_related_cancer_GWAS/Liver_cancer/155_PheCode.v1.0.fastGWA
+
+#Upload the second file - FinnGen
+MARKER rsids
+ALLELE alt ref
+FREQ af_alt
+EFFECT beta
+STDERR sebeta
+PVAL pval
+
+#There is no sample size column	in our GWAS data, so we	are going to specify this for the whole	GWAS
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 2585.545673
+
+PROCESS data/Obesity_related_cancer_GWAS/Liver_cancer/FinnGen/finngen_R8_C3_LIVER_INTRAHEPATIC_BILE_DUCTS_EXALLC
+
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Liver_cancer/Meta_analysis_Liver_cancer_GWAS .csv
+
+ANALYSE HETEROGENEITY
+
+CLEAR
+
+#Gallbladder
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER SNP
+ALLELE A1 A2
+FREQ AF1
+EFFECT BETA
+STDERR SE
+PVAL P
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 779.6666879
+
+PROCESS data/Obesity_related_cancer_GWAS/Gallbladder_cancer/159.3_PheCode.v1.0.fastGWA
+
+MARKER rsids
+ALLELE alt ref
+FREQ af_alt
+EFFECT beta
+STDERR sebeta
+PVAL pval
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 335.8913074
+
+PROCESS data/Obesity_related_cancer_GWAS/Gallbladder_cancer/FinnGen/finngen_R8_C3_GALLBLADDER_EXALLC
+
+OUTFILE data/Obesity_related_cancer_GWAS/Gallbladder_cancer/Meta_analysis_Gallbladder_cancer_GWAS .csv
+
+ANALYSE HETEROGENEITY
+
+CLEAR
+
+#Kidney
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER rsid
+ALLELE alt ref
+FREQ AF
+EFFECT logOR
+STDERR logOR_se
+PVAL pval
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 4445.278884
+
+SEPARATOR COMMA
+
+PROCESS data/Obesity_related_cancer_GWAS/Kidney_cancer/C_KIDNEY_NOTRENALPELVIS.gwas.imputed_v3.both_sexes_formatted.tsv 
+
+MARKER SNP
+ALLELE effect_allele.exposure other_allele.exposure
+FREQ eaf.exposure
+EFFECT beta.exposure
+STDERR se.exposure
+PVAL pval.exposure
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 3862.446516
+
+SEPARATOR WHITESPACE
+
+PROCESS data/Obesity_related_cancer_GWAS/Kidney_cancer/finngen/finn-b-C3_KIDNEY_NOTRENALPELVIS_EXALLC.csv
+
+OUTFILE data/Obesity_related_cancer_GWAS/Kidney_cancer/Meta_analysis_Kidney_cancer_GWAS .csv
+
+ANALYSE HETEROGENEITY
+
+CLEAR
+
+#Thyroid
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER SNP
+ALLELE A1 A2
+FREQ AF1
+EFFECT BETA
+STDERR SE
+PVAL P
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1514.740952
+
+PROCESS data/Obesity_related_cancer_GWAS/Thyroid_cancer/193_PheCode.v1.0.fastGWA
+
+MARKER rsids
+ALLELE alt ref
+FREQ af_alt
+EFFECT beta
+STDERR sebeta
+PVAL pval
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 6064.373253
+
+PROCESS data/Obesity_related_cancer_GWAS/Thyroid_cancer/FinnGen/finngen_R8_C3_THYROID_GLAND_EXALLC
+
+OUTFILE data/Obesity_related_cancer_GWAS/Thyroid_cancer/Meta_analysis_Thyroid_cancer_GWAS .csv
+
+ANALYSE HETEROGENEITY
+
+CLEAR
+
+#Multiple_myeloma
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER SNP
+ALLELE A1 A2
+FREQ AF1
+EFFECT BETA
+STDERR SE
+PVAL P
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 2253.211812
+
+PROCESS data/Obesity_related_cancer_GWAS/Multiple_myeloma/204.4_PheCode.v1.0.fastGWA
+
+MARKER rsids
+ALLELE alt ref
+FREQ af_alt
+EFFECT beta
+STDERR sebeta
+PVAL pval
+
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 4322.722676
+
+PROCESS data/Obesity_related_cancer_GWAS/Multiple_myeloma/FinnGen/finngen_R8_CD2_MULTIPLE_MYELOMA_PLASMA_CELL_EXALLC
+
+OUTFILE data/Obesity_related_cancer_GWAS/Multiple_myeloma/Meta_analysis_Multiple_myeloma_cancer_GWAS .csv
+
+ANALYSE HETEROGENEITY
+
+CLEAR
+
+#Pancreas
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER SNP
+ALLELE A1 A2
+FREQ AF1
+EFFECT BETA
+STDERR SE
+PVAL P
+
+PROCESS data/Obesity_related_cancer_GWAS/Pancreas_cancer/UKBiobank/157_PheCode.v1.0.fastGWA
+
+MARKER rsids
+ALLELE alt ref
+FREQ af_alt
+EFFECT beta
+STDERR sebeta
+PVAL pval
+
+PROCESS data/Obesity_related_cancer_GWAS/Pancreas_cancer/FinnGen/finngen_R8_C3_PANCREAS_EXALLC
+
+OUTFILE data/Obesity_related_cancer_GWAS/Multiple_myeloma/Meta_analysis_Pancreas_cancer_GWAS .csv
+
+ANALYSE HETEROGENEITY
+
+CLEAR
+

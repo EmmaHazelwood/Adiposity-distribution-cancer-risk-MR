@@ -1,0 +1,186 @@
+
+
+./munge_sumstats.py \
+--sumstats data/Measures_of_adiposity_Agrawal_2023/ASAT.allSNPs.txt \
+--N 38965 \
+--snp SNP \
+--a1 effect_allele.exposure \
+--a2 other_allele.exposure \
+--p pval.exposure \
+--frq eaf.exposure \
+--signed-sumstats beta.exposure,0 \
+--chunksize 500000 \
+--merge-alleles eur_w_ld_chr/w_hm3.snplist \
+--out ASAT 
+
+./munge_sumstats.py \
+--sumstats data/Measures_of_adiposity_Agrawal_2023/VAT.allSNPs.txt \
+--N 38965 \
+--snp SNP \
+--a1 effect_allele.exposure \
+--a2 other_allele.exposure \
+--p pval.exposure \
+--frq eaf.exposure \
+--signed-sumstats beta.exposure,0 \
+--chunksize 500000 \
+--merge-alleles eur_w_ld_chr/w_hm3.snplist \
+--out VAT 
+
+./munge_sumstats.py \
+--sumstats data/Measures_of_adiposity_Agrawal_2023/GFAT.allSNPs.txt \
+--N 38965 \
+--snp SNP \
+--a1 effect_allele.exposure \
+--a2 other_allele.exposure \
+--p pval.exposure \
+--frq eaf.exposure \
+--signed-sumstats beta.exposure,0 \
+--chunksize 500000 \
+--merge-alleles eur_w_ld_chr/w_hm3.snplist \
+--out GFAT 
+
+./munge_sumstats.py \
+--sumstats data/Liver_fat_GWAS/Full_sum_stats/GCST90016673_buildGRCh37.tsv \
+--N 32858 \
+--snp variant_id \
+--a1 effect_allele \
+--a2 other_allele \
+--p p_value \
+--frq effect_allele_frequency \
+--signed-sumstats beta,0 \
+--chunksize 500000 \
+--merge-alleles eur_w_ld_chr/w_hm3.snplist \
+--out Liver_fat
+
+./munge_sumstats.py \
+--sumstats data/Liver_fat_GWAS/Full_sum_stats/GCST90016675_buildGRCh37.tsv \
+--N 32858 \
+--snp variant_id \
+--a1 effect_allele \
+--a2 other_allele \
+--p p_value \
+--frq effect_allele_frequency \
+--signed-sumstats beta,0 \
+--chunksize 500000 \
+--merge-alleles eur_w_ld_chr/w_hm3.snplist \
+--out Pancreas_fat
+
+./munge_sumstats.py \
+--sumstats BMI_exp.txt \
+--N 681275 \
+--snp SNP \
+--a1 other_allele.exposure \
+--a2 effect_allele.exposure \
+--p pval.exposure \
+--frq eaf.exposure \
+--signed-sumstats beta.exposure,0 \
+--chunksize 500000 \
+--merge-alleles eur_w_ld_chr/w_hm3.snplist \
+--out BMI
+
+#!/bin/bash
+
+# Command 1
+./ldsc.py \
+--rg Liver_fat.sumstats.gz,Pancreas_fat.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Liver_fat_Pancreas_fat
+
+# Command 2
+./ldsc.py \
+--rg Liver_fat.sumstats.gz,ASAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Liver_fat_ASAT
+
+# Command 3
+./ldsc.py \
+--rg Liver_fat.sumstats.gz,VAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Liver_fat_VAT
+
+# Command 4
+./ldsc.py \
+--rg Liver_fat.sumstats.gz,GFAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Liver_fat_GFAT
+
+# Command 5
+./ldsc.py \
+--rg Liver_fat.sumstats.gz,BMI.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Liver_fat_BMI
+
+# Command 6
+./ldsc.py \
+--rg Pancreas_fat.sumstats.gz,ASAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Pancreas_fat_ASAT
+
+# Command 7
+./ldsc.py \
+--rg Pancreas_fat.sumstats.gz,VAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Pancreas_fat_VAT
+
+# Command 8
+./ldsc.py \
+--rg Pancreas_fat.sumstats.gz,GFAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Pancreas_fat_GFAT
+
+# Command 9
+./ldsc.py \
+--rg Pancreas_fat.sumstats.gz,BMI.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_Pancreas_fat_BMI
+
+# Command 10
+./ldsc.py \
+--rg ASAT.sumstats.gz,VAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_ASAT_VAT
+
+# Command 11
+./ldsc.py \
+--rg ASAT.sumstats.gz,GFAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_ASAT_GFAT
+
+# Command 12
+./ldsc.py \
+--rg ASAT.sumstats.gz,BMI.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_ASAT_BMI
+
+# Command 13
+./ldsc.py \
+--rg VAT.sumstats.gz,GFAT.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_VAT_GFAT
+
+# Command 14
+./ldsc.py \
+--rg VAT.sumstats.gz,BMI.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_VAT_BMI
+
+# Command 15
+./ldsc.py \
+--rg GFAT.sumstats.gz,BMI.sumstats.gz \
+--ref-ld-chr eur_w_ld_chr/ \
+--w-ld-chr eur_w_ld_chr/ \
+--out rg_GFAT_BMI

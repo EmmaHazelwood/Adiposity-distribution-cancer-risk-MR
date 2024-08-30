@@ -1,0 +1,164 @@
+#Re-reading meta-analyses back in to METAL to account for genomic control for a second time
+
+#Liver cancer
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER MarkerName
+ALLELE Allele1 Allele2
+FREQ Freq1
+EFFECT Effect
+STDERR StdErr
+PVAL P-value
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1
+
+PROCESS data/Obesity_related_cancer_GWAS/Liver_cancer/Meta_analysis_Liver_cancer_GWAS1.csv
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Liver_cancer/Meta_analysis_Liver_cancer_GWAS_GC .csv
+
+ANALYSE
+
+CLEAR
+
+#Gallbladder
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER MarkerName
+ALLELE Allele1 Allele2
+FREQ Freq1
+EFFECT Effect
+STDERR StdErr
+PVAL P-value
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1
+
+PROCESS data/Obesity_related_cancer_GWAS/Gallbladder_cancer/Meta_analysis_Gallbladder_cancer_GWAS1.csv
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Gallbladder_cancer/Meta_analysis_Gallbladder_cancer_GWAS_GC .csv
+
+ANALYSE
+
+CLEAR
+
+#Kidney
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER MarkerName
+ALLELE Allele1 Allele2
+FREQ Freq1
+EFFECT Effect
+STDERR StdErr
+PVAL P-value
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1
+
+PROCESS data/Obesity_related_cancer_GWAS/Kidney_cancer/Meta_analysis_Kidney_cancer_GWAS1.csv
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Kidney_cancer/Meta_analysis_Kidney_cancer_GWAS_GC .csv
+
+ANALYSE
+
+CLEAR
+
+#Thyroid
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER MarkerName
+ALLELE Allele1 Allele2
+FREQ Freq1
+EFFECT Effect
+STDERR StdErr
+PVAL P-value
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1
+
+PROCESS data/Obesity_related_cancer_GWAS/Thyroid_cancer/Meta_analysis_Thyroid_cancer_GWAS1.csv
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Thyroid_cancer/Meta_analysis_Thyroid_cancer_GWAS_GC .csv
+
+ANALYSE
+
+CLEAR
+
+#Multiple_myeloma
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER MarkerName
+ALLELE Allele1 Allele2
+FREQ Freq1
+EFFECT Effect
+STDERR StdErr
+PVAL P-value
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1
+
+PROCESS data/Obesity_related_cancer_GWAS/Multiple_myeloma/Meta_analysis_Multiple_myeloma_cancer_GWAS1.csv
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Multiple_myeloma/Meta_analysis_Multiple_myeloma_cancer_GWAS_GC .csv
+
+ANALYSE
+
+CLEAR
+
+#Pancreas
+GENOMICCONTROL ON
+SCHEME STDERR 
+
+AVERAGEFREQ ON
+MINMAXFREQ ON
+
+MARKER MarkerName
+ALLELE Allele1 Allele2
+FREQ Freq1
+EFFECT Effect
+STDERR StdErr
+PVAL P-value
+
+#There is no sample size column in our GWAS data, so we are going to specify this for the whole GWAS - effective sample size as calculated in the metal paper
+WEIGHT DONTUSECOLUMN
+DEFAULTWEIGHT 1
+
+PROCESS data/Obesity_related_cancer_GWAS/Multiple_myeloma/Meta_analysis_Pancreas_cancer_GWAS1.csv
+
+#Execute meta-analysis
+OUTFILE data/Obesity_related_cancer_GWAS/Multiple_myeloma/Meta_analysis_Pancreas_cancer_GWAS_GC .csv
+
+ANALYSE
+
+CLEAR
+
