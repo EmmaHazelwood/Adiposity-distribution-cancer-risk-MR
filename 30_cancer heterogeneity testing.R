@@ -25,7 +25,7 @@ pairwise_q <- function(df, group_name, exposures, subtypes) {
         mutate(
           Q_statistic = ((b - overall$b)^2) / (se^2 + overall$se^2),
           P_value = pchisq(Q_statistic, df = 1, lower.tail = FALSE),
-          Trait = gsub(" \\|\\|.*", "", exposure),  # remove ' || id:...'
+          Trait = exposure_trait,
           Cancer = group_name,
           Subtype = outcome
         ) %>%
@@ -76,19 +76,18 @@ process_file <- function(path) {
   return(results)
 }
 
-# Process both datasets
+# Process adiposity and molecular traits
 results_adiposity <- process_file("results/LiverFatMR/Adiposity_measures_obesity_cancers_results_new_proxies.csv")
 results_molecular <- process_file("results/LiverFatMR/Molecular_traits_cancers_results.csv")
 
-# Combine and format final results
+# Combine, rename columns nicely, and save
 combined_results <- bind_rows(results_adiposity, results_molecular) %>%
-  mutate(
-    `Q statistic` = format(round(Q_statistic, 2), scientific = TRUE),
-    `P value` = format(round(P_value, 2), scientific = TRUE)
-  ) %>%
-  select(Trait, Cancer, Subtype, `Q statistic`, `P value`)  # drop numeric Q_statistic/P_value
+  rename(`Q statistic` = Q_statistic, `P value` = P_value)
 
+# Clean up Trait names by removing anything after and including ' ||'
+combined_results <- combined_results %>%
+  mutate(Trait = sub(" \\|\\|.*", "", Trait))
+
+# Print and save
 print(combined_results)
-
-# Write output
 fwrite(combined_results, "results/LiverFatMR/pairwise_Q_all_traits_cancers.csv")
